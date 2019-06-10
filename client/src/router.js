@@ -8,6 +8,7 @@ import CategorizedProducts from './views/CategorizedProducts'
 // import SignUp from './views/SignUp'
 // import Login from './views/Login'
 import Cart from './views/Cart'
+import CreateCourse from './views/CreateCourse.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ export default new Router({
     {path: '/categories/:category', name: 'categorized-products', component: CategorizedProducts},
     // {path:'/sign-up', name: 'sign-up', component: SignUp},
     // {path:'/login', name: 'login', component: Login},
-    {path: '/cart', name: 'cart', component: Cart }
+    {path: '/cart', name: 'cart', component: Cart },
+    {path: '/create-course', name: 'create-course', component: CreateCourse}
   ]
 })

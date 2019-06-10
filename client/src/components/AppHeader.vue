@@ -30,49 +30,10 @@
             </div>
         </div>
         <div class="col-lg-5 input-left">
-          <button class="btn btn-light" @click="goToCreateCourse">Teach on udemy</button>
-          <!-- <div class="btn" data-vv-scope="form-4" >
-    <button class="btn btn-light" @click="showModal4">Instructor login</button>
-    <a-modal
-      v-model="visible4"
-      onOk="handleOk4"
-    ><br>
-      <template slot="footer">.
-      </template>
-    <div class="jumbotron">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 offset-sm-2">
-          <div>
-            <h2> Instructor Login </h2>
-            <form>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" style="width: 300px;" v-model="i_user_login.email" v-validate="'required|email'" id="instructor-login-email"  name="instructor-login-email" class="form-control" :class="{ 'is-danger': errors.has('form-4.instructor-login-email') }" />
-                <div v-if="errors.has('form-4.instructor-login-email')" class="invalid-feedback">
-                  {{ errors.first("form-4.instructor-login-email") }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" style="width: 300px;" v-model="i_user_login.password" v-validate="{ required: true, min: 6 }" id="instructor-login-password"  name="instructor-login-password" class="form-control" :class="{ 'is-danger': errors.has('form-4.instructor-login-password') }" />
-                <div v-if="errors.has('form-4.instructor-login-password')" class="invalid-feedback">
-                  {{ errors.first("form-4.instructor-login-password") }}
-                </div>
-              </div><br>
-              <a-button style="background-color: #d9534f; border: none; height: 40px; width: 150px;font-size: 17px; font-weight:500;" key="submit" type="primary" :loading="loading" @click="handleSubmit4('form-4')" >
-                  Login
-              </a-button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    </a-modal>
-  </div> -->
-
-          <!-- <img class="cart" src="../assets/shopping-cart.png" style="height: 20px; width: 20px; margin-right:3%; margin-left: 1%;" alt="not found" @click="goToCart"> -->
+          <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">Teach on udemy</button>
+          <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">Create New Course</button>
+          <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">Created Courses</button>
+          <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">My Courses</button>
                    <a-popover placement="bottomRight">
                                   <template slot="content">
                                          <div class="container-fluid items-popover" style="margin: 0px; padding: 0px;">
@@ -128,35 +89,12 @@
       <div class="row">
         <div class="col-sm-8 offset-sm-2">
           <div>
-            <h2>Login </h2>
-            <!-- <form>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" style="width: 300px;" v-model="user_login.email" v-validate="'required|email'" id="user-login-email" name="user-login-email" class="form-control" :class="{ 'input': true,'is-danger': errors.has('form-1.user-login-email') }" />
-                <div v-if="errors.has('form-1.user-login-email')" class="help is-danger">
-                  {{ errors.first("form-1.user-login-email") }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" style="width: 300px;" v-model="user_login.password" v-validate="{ required: true, min: 6 }" id="user-login-password" name="user-login-password" class="form-control" :class="{'input': true, 'is-danger': errors.has('form-1.user-login-password') }" />
-                <div v-if="errors.has('form-1.user-login-password')" class="help is-danger">
-                  {{ errors.first("form-1.user-login-password") }}
-                </div>
-              </div>
-              <div v-if="this.$store.state.loginMessage"> {{ this.$store.state.loginMessage }} </div>
-              <br>
-              <a-button class="btn btn-outline-info" style="background-color: #d9534f; border: none; height: 40px; width: 150px;font-size: 17px; font-weight:500;" key="submit" type="primary" :loading="loading" @click="handleSubmit1('form-1')">
-                  Login
-              </a-button>
-            </form> -->
-                 
+            <h2>Login </h2>               
                  <form @submit.prevent="handleSubmit1('form-1')" class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;" data-vv-scope="form-1">
                    <div v-if="this.$store.state.loginMessage" style="color: rgb(30, 107, 223);font-weight: 500;font-size: 18px;"> {{ this.$store.state.loginMessage }} </div>
             <div class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;">
                 <label class="login-label" style="color: black; font-size: 16px; margin:0px; padding: 0px;">Email</label><br>
                     <input name="email" v-model="user_login.email" class="form-control" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('form-1.email') }" type="text" placeholder="Email">
-                    <i style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-1.email')" class="fa fa-warning"></i>
                     <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-1.email')" class="help is-danger">{{ errors.first('form-1.email') }}</span>
             </div>
 
@@ -200,32 +138,6 @@
         <div class="col-sm-8 offset-sm-2">
           <div>
             <h2>Sign Up</h2>
-            <!-- <form style="margin-bottom: 0px;">
-              <div class="form-group">
-                <label for="firstName">Name</label>
-                <input type="text" style="width: 300px;" v-model="user_signup.name" v-validate="'required'" id="user-signup-name" name="user-signup-name" class="form-control" :class="{'input': true, 'is-danger': errors.has('form-2.user-signup-name') }" />
-                <div v-if="errors.has('form-2.user-signup-name')" class="help is-danger">
-                  {{ errors.first("form-2.user-signup-name") }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" style="width: 300px;" v-model="user_signup.email" v-validate="'required|email'"  class="form-control" id="user-signup-email" name="user-signup-email"  :class="{'input': true, 'is-danger': errors.has('form-2.user-signup-email') }" />
-                <div v-if="errors.has('form-2.user-signup-email')" class="help is-danger">
-                  {{ errors.first("form-2.user-signup-email") }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" style="width: 300px;" v-model="user_signup.password" v-validate="{ required: true, min: 6 }" class="form-control" id="user-signup-password" name="user-signup-password" :class="{'input': true, 'is-danger': errors.has('form-2.user-signup-password') }" />
-                <div v-if="errors.has('form-2.user-signup-password')" class="invalid-feedback">
-                  {{ errors.first("form-2.user-signup-password") }}
-                </div>
-              </div><br>
-              <a-button style="background-color: #d9534f; border: none; height: 40px; width: 150px;font-size: 17px; font-weight:500;" key="submit" type="primary" :loading="loading" @click="handleSubmit2('form-2')">
-                 Sign Up
-              </a-button>
-            </form> -->
                       <form @submit.prevent="handleSubmit2('form-2')" class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;" data-vv-scope="form-1">
 
                         <div class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;">
@@ -343,32 +255,13 @@ export default {
              
     })
     },
-    reset() {
-    this.user_login = {
-      email: "",
-      password: ""
-    };
-    this.$validator.clean();
-  },
     handleSubmit2(scope) {
       this.$validator.validateAll(scope).then(valid => {
         if (valid) {
           this.handleOk2();
-          // this.user_signup.email = '',
-          // this.user_signup.password = ''
-          // this.user_signup.name = ''
         }
       });
     },
-    // handleSubmit4(scope) {
-    //   this.$validator.validateAll(scope).then(valid => {
-    //     if (valid) {
-    //       this.handleOk4();
-    //       this.user.email = '',
-    //       this.user.password = ''
-    //     }
-    //   });
-    // },
     goToCreateCourse () {
       this.$router.push({path:'/become-an-instructor'})
     },
@@ -390,6 +283,7 @@ export default {
       window.localStorage.removeItem('userId');
       window.localStorage.removeItem('cartId');
       window.localStorage.removeItem('userName');
+      window.localStorage.removeItem('role')
       this.$store.commit('logoutUser');
       // this.$store.state.cart = [];
       // this.$store.state.bucket = [];

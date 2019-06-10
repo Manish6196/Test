@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import { resolve } from 'path';
-import { rejects } from 'assert';
 
 Vue.use(Vuex)
 
@@ -10,6 +8,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     currentUser: '',
+    isInstructor: localStorage.getItem('role')=='instructor'?true:false,
     // currentInstructor: '',
     currentCart: '',
     product: [],
@@ -53,11 +52,14 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         axios.post('http://localhost:8081/user/login', data)
         .then ((res) => {
-          console.log(res)
          window.localStorage.setItem("token", res.data.token)
          window.localStorage.setItem("userId", res.data.userId)
          window.localStorage.setItem('userName', res.data.userName)
+         window.localStorage.setItem('role', res.data.userRole)
          commit('loginUser', true);
+         if (res.data.userRole == 'instructor') {
+           commit('setInstructor', true)
+         }
          commit('setLoginMessage', res.data.message)
          commit('setCurrentUser', res.data.userId);
          let user = {userId: window.localStorage.getItem("userId")}
@@ -65,7 +67,6 @@ export default new Vuex.Store({
          resolve(res);
          }).catch(() => {
           commit('setLoginMessage', "Username or password incorrect")
-
         } )
       })
     },
@@ -120,8 +121,9 @@ export default new Vuex.Store({
     setLoginMessage: (state, message) => (state.loginMessage = message),
     // loginInstructor: (state, assignTrue) => (state.isInstructorLoggedIn = assignTrue),
     setCurrentUser: (state, currentUser) => (state.currentUser = currentUser),
+    setInstructor: (state,assignTrue) => (state.isInstructor = assignTrue),
     // setCurrentInstructor: (state, currentInstructor) => (state.currentInstructor = currentInstructor),
-    logoutUser: (state) => {state.isLoggedIn = false; state.currentUser = ''; state.currentCart = ''; state.cart = []; state.bucket = [] },
+    logoutUser: (state) => {state.isLoggedIn = false; state.currentUser = ''; state.currentCart = ''; state.cart = []; state.bucket = []; state.isInstructor = false },
     setSpecifiedItems: (state, products) => (state.specifiedItems = products),
     setCategories: (state, categories) => (state.categories = categories)
   }

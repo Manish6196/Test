@@ -1,5 +1,5 @@
 <template>
-    <div class="main-page">
+    <div class="main-page" v-if="(!this.$store.state.isLoggedIn) || (!this.$store.state.isInstructor)">
       <div class="container-fluid">
         <div class="row big-img-row">
             <div class="col-lg-12 big-img">
@@ -9,7 +9,7 @@
                   <p style="font-size: 20px; width: 550px; color: white;">Create an online video course and earn money by teaching people around the world.</p>
                   <br><br>
                  
-                  <div v-if="!this.$store.state.isLoggedIn" class="btn" data-vv-scope="form-3" >
+                  <div class="btn" data-vv-scope="form-3" >
     <button type="button" class="btn btn-danger" style="height: 60px; width: 280px; font-size: 16px;" @click="showModal3"><b style="font-weight: 550;">Become an instructor</b></button>
     <a-modal 
       style="padding:10px;"
@@ -134,10 +134,26 @@ export default {
         this.visible3 = false;
         this.loading = false;
       }, 500);
-      await axios.post('http://localhost:8081/user/signup', {email: this.i_user_signup.email, password: this.i_user_signup.password, name: this.i_user_signup.name, role: 'instructor'});
-      
+        let res = axios.post('http://localhost:8081/user/signup', {email: this.i_user_signup.email, password: this.i_user_signup.password, name: this.i_user_signup.name, role: 'instructor'});
+          res.then(res => {
+            console.log(res)
+        this.$router.push({name: 'create-course'})
+        }).catch(err => {
+           console.log(err)
+        }
+        )
     }
-  }
+  },
+  beforeRouteEnter(to, from, next){
+    next(vm => { 
+        // access to component instance via `vm` 
+        if(vm.$store.state.isInstructor){
+            next('/');
+        }else{
+            next();
+        }
+    })
+} 
 }
 </script>
 

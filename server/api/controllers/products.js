@@ -75,7 +75,7 @@ exports.categories_get_category = (req, res, next) => {
 };
 
 exports.products_create_product = (req, res, next) => {
-  console.log(JSON.stringify(req.files))
+  console.log(req)
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
