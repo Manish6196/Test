@@ -128,7 +128,7 @@ p {
 
 .category-heading {
     height: 100px;
-    margin-top: 50px;
+    margin-top: 30px;
     padding-top: 20px;
     background: linear-gradient(220deg,#EC5252 -10%,#6E1A52 70%);
     color: white;

@@ -78,6 +78,7 @@ exports.products_create_product = (req, res, next) => {
   console.log(req)
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
+    userId: req.body.userId,
     title: req.body.title,
     author: req.body.author,
     price: req.body.price,
@@ -93,6 +94,7 @@ exports.products_create_product = (req, res, next) => {
           title: result.title,
           price: result.price,
           _id: result._id,
+          userId: result.userId,
           author: result.author,
           thumbnail: result.thumbnail,
           preview: result.preview,

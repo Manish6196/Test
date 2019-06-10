@@ -30,10 +30,10 @@
             </div>
         </div>
         <div class="col-lg-5 input-left">
-          <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">Teach on udemy</button>
-          <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">Create New Course</button>
-          <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">Created Courses</button>
-          <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="goToCreateCourse">My Courses</button>
+          <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="becomeInstructor">Teach on udemy</button>
+          <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="createNewCourse">Create New Course</button>
+          <button v-if="this.$store.state.isInstructor" class="btn btn-light">Created Courses</button>
+          <button v-if="!this.$store.state.isInstructor" class="btn btn-light">My Courses</button>
                    <a-popover placement="bottomRight">
                                   <template slot="content">
                                          <div class="container-fluid items-popover" style="margin: 0px; padding: 0px;">
@@ -262,8 +262,11 @@ export default {
         }
       });
     },
-    goToCreateCourse () {
+    becomeInstructor () {
       this.$router.push({path:'/become-an-instructor'})
+    },
+    createNewCourse () {
+      this.$router.push({name: 'create-course'})
     },
     click ({key}) {
       this.fetchSpecifiedCategoryItems (key)
