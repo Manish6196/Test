@@ -52,7 +52,7 @@
     <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-4.preview')" class="help is-danger">{{ errors.first('form-4.preview') }}</span>
   </div>
 
-  <button type="btn" class="btn btn-primary" @click.prevent ="handleSubmit4('form-4')">Create your course</button>
+  <button type="btn" class="btn btn-primary" @click.stop.prevent ="handleSubmit4('form-4')">Create your course</button>
 </form>
               </div>
                 <div class="col-lg-5">
@@ -124,11 +124,12 @@ export default {
         'Content-Type': 'multipart/form-data'
     }
   }
-).then(function(){
+)
+.then(() => {
   console.log('SUCCESS!!');
-  this.$router.push({name: 'home'})
+  this.$router.push({path: '/'})
 })
-.catch(function(){
+.catch(() => {
   console.log('FAILURE!!');
 });
       }
