@@ -81,7 +81,6 @@ export default new Vuex.Store({
     //   dispatch('getCart', user)
     // },
     async fetchSpecifiedCategoryItems ({ commit }, c) {
-      console.log(c)
       const response = await axios.post('http://localhost:8081/categories/specified', { category: c}, {headers: { Authorization : 'bearer ' + localStorage.getItem('token')}} );
       commit('setSpecifiedItems', response.data.products);
     },

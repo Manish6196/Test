@@ -52,7 +52,7 @@
     <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-4.preview')" class="help is-danger">{{ errors.first('form-4.preview') }}</span>
   </div>
 
-  <button type="btn" class="btn btn-primary" @click.stop.prevent ="handleSubmit4('form-4')">Create your course</button>
+  <button type="btn" class="btn btn-primary" @click="handleSubmit4('form-4')">Create your course</button>
 </form>
               </div>
                 <div class="col-lg-5">

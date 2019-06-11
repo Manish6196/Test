@@ -6,11 +6,9 @@ const User = require("../models/user");
 // const Cart = require("../models/cart")
 
 exports.user_signup = (req, res, next) => {
-  console.log(req.body)
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
-      console.log(user)
       if (user.length >= 1) {
         if (user[0].role == 'user') {
           User.findOneAndUpdate({ email: req.body.email }, { "$set": { "role": "instructor" }}).exec(function(err, book){
@@ -45,7 +43,6 @@ exports.user_signup = (req, res, next) => {
             user
               .save()
               .then(result => {
-                console.log(result);
                 res.status(201).json({
                   message: "User created"
                 });
@@ -88,7 +85,6 @@ exports.user_login = (req, res, next) => {
               expiresIn: "1h"
             }
           );
-          console.log(token)
           return res.status(200).json({
             message: "Logged in successfully!",
             token: token,

@@ -68,15 +68,14 @@ export default {
   margin-top: 25px;
   padding-bottom: 0px;
   padding: 0px;
-  width: 370px;
+  width: 350px;
   color: black;
   border-radius: 4px;
 }
 
 .review-video {
-  margin: 10px auto;
   height: 200px;
-  width: 368px;
+  width: 348px !important;
 }
 
 .review-video {

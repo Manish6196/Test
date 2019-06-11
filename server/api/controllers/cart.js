@@ -54,7 +54,6 @@ exports.get_a_cart = (req, res, next) => {
   };
 
   exports.create_cart = (req, res, next) => {
-    console.log(req.body)
     Cart.findOne({ userId: req.body.userId })
       .then(cart => {
         if (!cart) {

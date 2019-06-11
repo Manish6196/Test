@@ -46,7 +46,7 @@
                   {{ errors.first("form-3.instructor-signup-password") }}
                 </div>
               </div><br>
-              <a-button style="background-color: #d9534f; border: none; height: 40px; width: 150px;font-size: 17px; font-weight:500;" key="submit" type="primary" :loading="loading" @click="handleSubmit3('form-3')">
+              <a-button style="background-color: #d9534f; border: none; height: 40px; width: 150px;font-size: 17px; font-weight:500;" key="submit" type="primary" @click="handleSubmit3('form-3')">
                  Sign Up
               </a-button>
             </form>
@@ -104,7 +104,6 @@ export default {
   name: 'create-course',
   data () {
       return {
-          loading: false,
           visible3: false,
           submitted_i_signup: false,
           i_user_signup: {
@@ -129,14 +128,14 @@ export default {
       this.visible3 = true;
     },
     async handleOk3() {
-      this.loading = true;
       setTimeout(() => {
         this.visible3 = false;
-        this.loading = false;
       }, 500);
         let res = axios.post('http://localhost:8081/user/signup', {email: this.i_user_signup.email, password: this.i_user_signup.password, name: this.i_user_signup.name, role: 'instructor'});
           res.then(res => {
-            console.log(res)
+            let y = res
+            y = ''
+            console.log(y)
         this.$router.push({name: 'create-course'})
         }).catch(err => {
            console.log(err)

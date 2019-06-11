@@ -268,11 +268,12 @@ h1 {
 .course-div {
   margin-top: 15px;
   margin-bottom: 200px;
-  padding-left: 5%;
+  text-align: center;
 }
 
 .course-box {
   display: inline-block;
+  text-align: left;
   height: 290px;
   width: 215px;
   margin: 0px 0.5%;

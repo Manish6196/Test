@@ -32,8 +32,8 @@
         <div class="col-lg-5 input-left">
           <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="becomeInstructor">Teach on udemy</button>
           <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="createNewCourse">Create New Course</button>
-          <button v-if="this.$store.state.isInstructor" class="btn btn-light">Created Courses</button>
-          <button v-if="!this.$store.state.isInstructor" class="btn btn-light">My Courses</button>
+          <button v-if="this.$store.state.isInstructor" class="btn btn-light" @click="createdCourses">Created Courses</button>
+          <button v-if="!this.$store.state.isInstructor" class="btn btn-light" @click="myCourses">My Courses</button>
                    <a-popover placement="bottomRight">
                                   <template slot="content">
                                          <div class="container-fluid items-popover" style="margin: 0px; padding: 0px;">
@@ -90,7 +90,7 @@
         <div class="col-sm-8 offset-sm-2">
           <div>
             <h2>Login </h2>               
-                 <form @submit.prevent="handleSubmit1('form-1')" class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;" data-vv-scope="form-1">
+                 <form class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;"  data-vv-scope="form-1" >
                    <div v-if="this.$store.state.loginMessage" style="color: rgb(30, 107, 223);font-weight: 500;font-size: 18px;"> {{ this.$store.state.loginMessage }} </div>
             <div class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;">
                 <label class="login-label" style="color: black; font-size: 16px; margin:0px; padding: 0px;">Email</label><br>
@@ -107,7 +107,7 @@
                 
             </div>
             <div class="col-lg-12" style="color: black; font-size: 16px; margin-top: 20px; padding: 0px;">
-                    <button class="btn btn-danger" type="submit" name="button" :loading="loading">Login</button>
+                    <button class="btn btn-danger" type="button" name="button456" @click ="handleSubmit1('form-1')">Login</button>
             </div>
             
         </form>
@@ -123,7 +123,7 @@
 
 
      
-            <div v-if="!this.$store.state.isLoggedIn" class="btn" data-vv-scope="form-2" >
+            <div v-if="!this.$store.state.isLoggedIn" class="btn">
     <button v-if="!this.$store.state.isLoggedIn" class="btn btn-danger" id="sn-btn" @click="showModal2">Sign Up</button>
     <a-modal 
       style="padding:10px;"
@@ -138,31 +138,31 @@
         <div class="col-sm-8 offset-sm-2">
           <div>
             <h2>Sign Up</h2>
-                      <form @submit.prevent="handleSubmit2('form-2')" class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;" data-vv-scope="form-1">
+                      <form class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;" data-vv-scope="form-2">
 
                         <div class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;">
                 <label class="label" style="color: black; font-size: 16px; margin:0px; padding: 0px;">Name</label><br>
-                    <input name="name" v-model="user_signup.name" class="form-control" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('form-1.name') }" type="text" placeholder="Email">
-                    <i style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-1.name')" class="fa fa-warning"></i>
-                    <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-1.name')" class="help danger">{{ errors.first('form-1.name') }}</span>
+                    <input name="name" v-model="user_signup.name" class="form-control" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('form-2.name') }" type="text" placeholder="Email">
+                    <i style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-2.name')" class="fa fa-warning"></i>
+                    <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-2.name')" class="help danger">{{ errors.first('form-2.name') }}</span>
             </div>
 
             <div class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;">
                 <label class="label" style="color: black; font-size: 16px; margin:0px; padding: 0px;">Email</label><br>
-                    <input name="email" v-model="user_signup.email" class="form-control" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('form-1.email') }" type="text" placeholder="Email">
-                    <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-1.email')" class="help danger">{{ errors.first('form-1.email') }}</span>
+                    <input name="email" v-model="user_signup.email" class="form-control" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('form-2.email') }" type="text" placeholder="Email">
+                    <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-2.email')" class="help danger">{{ errors.first('form-2.email') }}</span>
             </div>
 
             <div class="col-lg-12" style="color: black; font-size: 16px; margin:0px; padding: 0px;">
                 <label class="label" style="color: black; font-size: 16px; margin:0px; padding: 0px;">Password</label>
               
-                    <input name="password" v-model="user_signup.password" class="form-control" v-validate="'required|min:6'" :class="{'input': true, 'is-danger': errors.has('form-1.password') }" type="password" placeholder="Password">
-                    <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-1.password')" class="help danger">{{ errors.first('form-1.password') }}</span>
+                    <input name="password" v-model="user_signup.password" class="form-control" v-validate="'required|min:6'" :class="{'input': true, 'is-danger': errors.has('form-2.password') }" type="password" placeholder="Password">
+                    <span style="color: red; font-size: 12px; margin:0px; padding: 0px;" v-show="errors.has('form-2.password')" class="help danger">{{ errors.first('form-2.password') }}</span>
                 
             </div>
             <div class="col-lg-12" style="color: black; font-size: 16px; margin-top: 20px; padding: 0px;">
                 <p class="control">
-                    <button class="btn btn-danger" type="submit" name="button" :loading="loading">Sign up</button>
+                    <button class="btn btn-danger" type="button" name="button123" @click="handleSubmit2('form-2')">Sign up</button>
                 </p>
             </div>
         </form>
@@ -190,7 +190,6 @@ export default {
   name: 'AppHeader',
    data() {
     return {
-      loading: false,
       visible1: false,
       visible2: false,
       visible4: false,
@@ -207,9 +206,6 @@ export default {
         email: "",
         password: ""
       },
-      submitted_login: false,
-      submitted_signup: false,
-      submitted_i_login: false,
       search: ''
     }
   },
@@ -234,14 +230,14 @@ export default {
       });
     },
     handleOk1() {
-      this.loading = true;
        this.userLogin({email: this.user_login.email, password: this.user_login.password})
          .then(res => {
-            console.log(res)
+           let y = res
+           y = ''
+            console.log(y)
             if(window.localStorage.getItem('token')) {
              setTimeout(() => {
              this.visible1 = false
-             this.loading = false
              this.$store.state.loginMessage = null
              this.user_login.password = '';
              this.user_login.email = '';
@@ -262,15 +258,35 @@ export default {
         }
       });
     },
+    async handleOk2() {
+      setTimeout(() => {
+        this.user_signup.name = '';
+        this.user_signup.password = '';
+        this.user_signup.email = '';
+        this.visible2 = false;
+        this.$nextTick(() => {
+             this.errors.clear();
+             this.$nextTick(() => {
+             this.$validator.reset();
+                });});
+      }, 500);
+      await axios.post('http://localhost:8081/user/signup', {email: this.user_signup.email, password: this.user_signup.password, name: this.user_signup.name, role: 'user'});
+    },
     becomeInstructor () {
       this.$router.push({path:'/become-an-instructor'})
     },
     createNewCourse () {
       this.$router.push({name: 'create-course'})
     },
+    createdCourses () {
+      this.$router.push({name: 'my-created-courses', params: {userId: window.localStorage.getItem('userId')}})
+    },
     click ({key}) {
       this.fetchSpecifiedCategoryItems (key)
       this.$router.push({name:'categorized-products', params: { category: key}, query: { category: key} })
+    },
+    myCourses () {
+      this.$router.push({name: 'my-courses'})
     },
     goToHome () {
       this.$router.push({name: 'home'})
@@ -299,33 +315,12 @@ export default {
      showModal2() {
       this.visible2 = true;
     },
-    async handleOk2() {
-      this.loading = true;
-      setTimeout(() => {
-        this.visible2 = false;
-        this.loading = false;
-      }, 500);
-      await axios.post('http://localhost:8081/user/signup', {email: this.user_signup.email, password: this.user_signup.password, name: this.user_signup.name, role: 'user'});
-      
-    },
-    // async handleOk4() {
-    //   this.loading = true;
-    //   setTimeout(() => {
-    //     this.visible4 = false;
-    //     this.loading = false;
-    //   }, 500);
-    //   await this.i_userLogin({email: this.user.i_l_email, password: this.user.i_l_password})
-      
-    // },
     handleCancel1() {
       this.visible1 = false;
     },
     handleCancel2() {
       this.visible2 = false;
-    },
-    // handleCancel4() {
-    //   this.visible4 = false;
-    // }
+    }
   },
   created () {
     this.fetchCategories();

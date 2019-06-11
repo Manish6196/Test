@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Category = require("../models/category");
 
 exports.categories_create_category = (req, res, next) => {
-      console.log(JSON.stringify(req.files))
       const category = new Category({
       _id: new mongoose.Types.ObjectId(),
       category: req.body.category 
@@ -10,7 +9,6 @@ exports.categories_create_category = (req, res, next) => {
     category
       .save()
       .then(result => {
-        console.log(result);
         res.status(201).json({
             _id: result._id,
             category: result.category

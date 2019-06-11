@@ -3,7 +3,7 @@ const Product = require("../models/product");
 
 exports.products_get_all = (req, res, next) => {
   Product.find()
-    .select("title price _id author thumbnail preview category")
+    .select("title price _id author thumbnail preview category userId")
     .exec()
     .then(docs => {
       const response = {
@@ -16,6 +16,7 @@ exports.products_get_all = (req, res, next) => {
             thumbnail: doc.thumbnail,
             preview: doc.preview,
             category: doc.category,
+            userId: doc.userId,
             _id: doc._id
           };
         })
@@ -39,7 +40,7 @@ exports.products_get_all = (req, res, next) => {
 exports.categories_get_category = (req, res, next) => {
   console.log( req )
   Product.find({ category: req.body.category})
-    .select("title price _id author thumbnail preview category")
+    .select("title price _id author thumbnail preview category userId")
     .exec()
     .then(docs => {
       console.log(docs)
@@ -52,6 +53,7 @@ exports.categories_get_category = (req, res, next) => {
             thumbnail: doc.thumbnail,
             preview: doc.preview,
             category: doc.category,
+            userId: doc.userId,
             _id: doc._id
           };
         })

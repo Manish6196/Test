@@ -62,9 +62,15 @@ export default {
       ...mapGetters(["categories","specifiedItems"])
   },
   methods:{
-    ...mapActions(["fetchCategories"]),
+    ...mapActions(["fetchCategories","addToCart"]),
     showDetails (id) {
       this.$router.push({ name: 'details', params: { id: id}, query: { id: id} })
+    },
+    goToCart () {
+      this.$router.push({name: 'cart'})
+    },
+    addItemToCart (id) {
+        this.addToCart({productId: id, userId: window.localStorage.getItem("userId")})
     }
   },
   created() {
