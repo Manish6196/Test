@@ -13,7 +13,7 @@
                     <div class="serched-item" v-for="product in filteredList" :key="product._id">
                         <div>
                             <div class="col-lg-4 image-item">
-                                 <img @click="showDetails(product._id)" class="course-img" :src="'http://192.168.0.106:8081/uploads/'+product.thumbnail" alt="">
+                                 <img @click="showDetails(product._id)" class="course-img" :src="'http://localhost:8081/uploads/'+product.thumbnail" alt="">
                             </div>
                             <div class="content-box col-lg-5">
                                <div @click="showDetails(product._id)" style="cursor: pointer;" class="content-heading">{{product.title}}</div>

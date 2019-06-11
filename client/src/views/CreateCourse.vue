@@ -117,7 +117,7 @@ export default {
           formData.set('category', this.category);
           formData.append('thumbnail', this.thumbnail); 
           formData.append('preview', this.preview); 
-      axios.post( 'http://192.168.0.106:8081/products',
+      axios.post( 'http://localhost:8081/products',
   formData,
   {
     headers: {

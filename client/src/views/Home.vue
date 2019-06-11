@@ -53,7 +53,7 @@
                       </template>     
             <div  @click="showDetails(product._id)">
               <div>
-              <img class="course-img" :src="'http://192.168.0.106:8081/uploads/'+product.thumbnail" alt="">
+              <img class="course-img" :src="'http://localhost:8081/uploads/'+product.thumbnail" alt="">
               </div>
                 <div class="content-box">
                   <div class="content-heading">{{product.title}}</div>

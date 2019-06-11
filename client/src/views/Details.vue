@@ -12,7 +12,7 @@
               </div>
             </div>  
             <div class="col-lg-3 preview-area">
-              <video class="review-video" :src="'http://192.168.0.106:8081/uploads/' + product.preview" preload="auto|metadata|none" controls></video>
+              <video class="review-video" :src="'http://localhost:8081/uploads/' + product.preview" preload="auto|metadata|none" controls></video>
               <div class="preview-content">
                 <h1 style="font-weight: 700; font-size:40px; color: #505763; line-height: 0.7;"> ${{ product.price }} </h1>
                 <p style="color: #992337;padding-top: 8px;font-size: 16px;">1 day left at this price. Hurry Up!</p>

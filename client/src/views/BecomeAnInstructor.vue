@@ -140,7 +140,7 @@ export default {
              this.$validator.reset();
                 });});
       }, 500);
-        let res = axios.post('http://192.168.0.106:8081/user/signup', {email: this.i_user_signup.email, password: this.i_user_signup.password, name: this.i_user_signup.name, role: 'instructor'});
+        let res = axios.post('http://localhost:8081/user/signup', {email: this.i_user_signup.email, password: this.i_user_signup.password, name: this.i_user_signup.name, role: 'instructor'});
           res.then(res => {
             let y = res
             y = ''
