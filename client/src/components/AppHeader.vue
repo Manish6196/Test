@@ -287,11 +287,8 @@ export default {
       window.localStorage.removeItem('cartId');
       window.localStorage.removeItem('userName');
       window.localStorage.removeItem('role')
-      this.$store.commit('logoutUser');
-      // this.$store.state.cart = [];
-      // this.$store.state.bucket = [];
-      // this.$store.state.currentUser = '';
-      // this.$store.state.currentCart = ''
+      this.$store.commit('logoutUser')
+      this.$router.push({name: 'home'})
     },
     goToCart () {
       this.$router.push({name: 'cart'})
