@@ -130,6 +130,15 @@ export default {
     async handleOk3() {
       setTimeout(() => {
         this.visible3 = false;
+        this.i_user_signup.name = '';
+        this.i_user_signup.password = '';
+        this.i_user_signup.email = '';
+        this.visible2 = false;
+        this.$nextTick(() => {
+             this.errors.clear();
+             this.$nextTick(() => {
+             this.$validator.reset();
+                });});
       }, 500);
         let res = axios.post('http://localhost:8081/user/signup', {email: this.i_user_signup.email, password: this.i_user_signup.password, name: this.i_user_signup.name, role: 'instructor'});
           res.then(res => {
